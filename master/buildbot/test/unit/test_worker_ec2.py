@@ -49,8 +49,15 @@ def skip_ec2(f):
     f.skip = "boto3 or moto is not installed"
     return f
 
+def skip_ec2_test(f):
+    f.skip = "Unable to test ec2 in emerge sandbox"
+    return f
 
-if boto3 is None:
+EMERGE_TEST_OVERRIDE = os.environ.get("EMERGE_TEST_OVERRIDE", False)
+
+if EMERGE_TEST_OVERRIDE:
+    mock_ec2 = skip_ec2_test
+elif boto3 is None:
     mock_ec2 = skip_ec2
 
 
