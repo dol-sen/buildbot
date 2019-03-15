@@ -851,7 +851,7 @@ It accepts the following arguments:
     * a list of the branches to fetch. Non-existing branches are ignored.
     * ``True`` indicating that all branches should be fetched
     * a callable which takes a single argument.
-      It should take a remote refspec (such as ``'refs/heads/master'``, and return a boolean indicating whether that branch should be fetched.
+      It should take a remote refspec (such as ``'refs/heads/master'``), and return a boolean indicating whether that branch should be fetched.
 
 ``branch``
     accepts a single branch name to fetch.
@@ -950,8 +950,15 @@ The :bb:chsrc:`HgPoller` accepts the following arguments:
     the url that describes the remote repository, e.g. ``http://hg.example.com/projects/myrepo``.
     Any url suitable for ``hg pull`` can be specified.
 
+``bookmarks``
+    a list of the bookmarks to monitor.
+
+``branches``
+    a list of the branches to monitor; defaults to ``['default']``.
+
 ``branch``
-    the desired branch to pull, will default to ``'default'``
+    the desired branch to pull.
+    Exists for backwards compatibility with old configurations.
 
 ``workdir``
     the directory where the poller should keep its local repository.

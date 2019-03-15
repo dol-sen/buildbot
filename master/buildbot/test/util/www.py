@@ -13,8 +13,6 @@
 #
 # Copyright Buildbot Team Members
 
-from future.utils import integer_types
-
 import json
 import os
 import pkg_resources
@@ -93,7 +91,7 @@ class FakeRequest:
 
     def setResponseCode(self, code, text=None):
         # twisted > 16 started to assert this
-        assert isinstance(code, integer_types)
+        assert isinstance(code, int)
         self.responseCode = code
         self.responseText = text
 
@@ -129,8 +127,7 @@ class RequiresWwwMixin:
         if 'BUILDBOT_TEST_REQUIRE_WWW' in os.environ:
             raise RuntimeError('$BUILDBOT_TEST_REQUIRE_WWW is set but '
                                'buildbot-www is not installed')
-        else:
-            skip = 'buildbot-www not installed'
+        skip = 'buildbot-www not installed'
 
 
 class WwwTestMixin(RequiresWwwMixin):

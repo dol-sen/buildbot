@@ -13,8 +13,6 @@
 #
 # Copyright Buildbot Team Members
 
-from future.utils import lrange
-
 import gc
 import sys
 
@@ -128,7 +126,7 @@ class TestMetricTimeEvent(TestMetricBase):
         self.assertEqual(report['timers']['foo_time'], 5)
 
     def testAverages(self):
-        data = lrange(10)
+        data = list(range(10))
         for i in data:
             metrics.MetricTimeEvent.log('foo_time', i)
         report = self.observer.asDict()
@@ -169,8 +167,8 @@ class TestPeriodicChecks(TestMetricBase):
 
     def testGetRSS(self):
         self.assertTrue(metrics._get_rss() > 0)
-    if sys.platform != 'linux2':
-        testGetRSS.skip = "only available on linux2 platforms"
+    if sys.platform != 'linux':
+        testGetRSS.skip = "only available on linux platforms"
 
 
 class TestReconfig(TestMetricBase):

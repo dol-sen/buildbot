@@ -217,6 +217,8 @@ setup_args = {
         include("buildbot/spec/types", "*.raml"),
         include("buildbot/test/unit/test_templates_dir", "*.html"),
         include("buildbot/test/unit/test_templates_dir/plugin", "*.*"),
+        include("buildbot/test/integration/pki", "*.*"),
+        include("buildbot/test/integration/pki/ca", "*.*"),
     ] + include_statics("buildbot/www/static"),
     'cmdclass': {'install_data': install_data_twisted,
                  'sdist': our_sdist},
@@ -294,7 +296,7 @@ setup_args = {
             ('buildbot.steps.source.cvs', ['CVS']),
             ('buildbot.steps.source.darcs', ['Darcs']),
             ('buildbot.steps.source.gerrit', ['Gerrit']),
-            ('buildbot.steps.source.git', ['Git']),
+            ('buildbot.steps.source.git', ['Git', 'GitTag']),
             ('buildbot.steps.source.github', ['GitHub']),
             ('buildbot.steps.source.gitlab', ['GitLab']),
             ('buildbot.steps.source.mercurial', ['Mercurial']),
@@ -463,8 +465,6 @@ setup_args['install_requires'] = [
     'Jinja2 >= 2.1',
     # required for tests, but Twisted requires this anyway
     'zope.interface >= 4.1.1',
-    # python-future required for py2/3 compatibility
-    'future',
     'sqlalchemy>=1.1.0',
     'sqlalchemy-migrate>=0.9',
     'python-dateutil>=1.5',
